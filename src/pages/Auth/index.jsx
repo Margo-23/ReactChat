@@ -8,9 +8,7 @@ import './Auth.scss';
 
 
 
-
 function Auth() {
-
   return (
     <section className='auth'>
       <div className="auth__content">    
@@ -18,10 +16,7 @@ function Auth() {
       <Routes>
     <Route exact path='/' element={<LoginForm />}></Route>
     <Route path='/register' element={<RegisterForm/>}></Route>
-
-      </Routes>
-
-    
+      </Routes>    
 
       </div>
     </section>
