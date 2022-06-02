@@ -10,6 +10,7 @@ import waveSvg from '../../assets/img/wave.svg';
 import playSvg from '../../assets/img/play.svg';
 import pauseSvg from '../../assets/img/pause.svg';
 import convertCurrentTime from '../../utils/helpers/convertCurrentTime'
+import { Avatar } from '../';
 
 
 
@@ -59,23 +60,20 @@ const AudioMessage=({audio})=>{
 
 return (
 <div className='message__audio'>
-            <audio ref={audioElem} src={audio} preload='auto'></audio>
-            <div className='message__audio-progress' style={{width: progressWidth + '%'}}></div>
-            <div className='message__audio-info'>
-              <div className='message__audio-btn'>
-                <button onClick={togglePlay}>
-                  {!isPlaing? <img src={playSvg}/> : <img src={pauseSvg}/>}                           
-                </button>
-                </div>
-              <div className='message__audio-wave'><img src={waveSvg} alt='wave svg'></img></div>
-              <span className='message__audio-duration'>{audioTime? audioTime: '00:00'}</span>
-            </div>
-            
+  <audio ref={audioElem} src={audio} preload='auto'></audio>
+  <div className='message__audio-progress' style={{width: progressWidth + '%'}}></div>
+  <div className='message__audio-info'>
+    <div className='message__audio-btn'>
+      <button onClick={togglePlay}>
+        {!isPlaing? <img src={playSvg}/> : <img src={pauseSvg}/>}                           
+      </button>
+      </div>
+    <div className='message__audio-wave'><img src={waveSvg} alt='wave svg'></img></div>
+    <span className='message__audio-duration'>{audioTime? audioTime: '00:00'}</span>
+  </div>            
  </div>
-
 )
 }
-
   return (
     <div className={classNames('message', 
     {
@@ -86,6 +84,7 @@ return (
     })}>
       <div className='message__avatar'>
         <img className='avatar' alt={`User ${user.fullname}`} src={avatar}/>
+        {/* <Avatar user={user}></Avatar> */}
       </div>
       <div className='message__content'>
         {<IconReaded isMe={isme} isReaded={isReaded}></IconReaded>}

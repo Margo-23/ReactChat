@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { format,isToday } from 'date-fns';
 
 import IconReaded from '../IconReaded';
+import {Avatar} from '../../components'
 
 
 
@@ -27,7 +28,7 @@ function DialogItem({user, message, unReaded, isMe}) {
   return (
     <div className={classNames('dialogs__item', {'dialogs__item--online': user.isOnline})}>
         <div className='dialogs__item-avatar'>
-        {getAvatar(user.avatar)}           
+        <Avatar user={user}></Avatar>           
         </div>
         <div className='dialogs__item-info'>
             <div className='dialogs__item-info-top'>

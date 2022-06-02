@@ -3,6 +3,8 @@ import React from 'react';
 import './Home.scss';
 import {Message, Dialogs} from '../../components';
 
+
+
 function Home() {
   return (
     <div className='home'>
@@ -24,11 +26,11 @@ function Home() {
         unReaded : 0,
       },
       {
-        _id: Math.random(),
-        user : {
         _id: 2,
-        fullname: 'Jacob Kovalsky',
-        avatar: 'https://javascript-conference.com/wp-content/uploads/2018/11/1542626234-Sebastian-Springer-500x330.jpg',
+        user : {
+        _id: '57be8b833d8c8099f9a51b4649b9e481 ',
+        fullname: 'Mary Kovalsky',
+        avatar: null,
         isOnline: true ,
       },
         text: 'Some interesting text1',
