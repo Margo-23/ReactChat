@@ -65,7 +65,7 @@ function Home() {
 
       ]}
       />
-            <Message 
+      <Message 
       avatar='https://image.shutterstock.com/image-vector/beautiful-girl-hairstyle-600w-374850607.jpg' 
       attachments={[
         {
@@ -73,6 +73,11 @@ function Home() {
           url: 'https://images.pexels.com/photos/6749092/pexels-photo-6749092.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
         }
       ]}
+      />
+      <Message 
+      // date='Thu May 26 2022 09:57:45'
+      avatar='https://image.shutterstock.com/image-vector/beautiful-girl-hairstyle-600w-374850607.jpg' 
+      audio='https://notificationsounds.com//storage/sounds/file-sounds-1348-ill-make-it-possible.mp3'
       />
       <Message 
       avatar='https://image.shutterstock.com/image-vector/beautiful-girl-hairstyle-600w-374850607.jpg' 
