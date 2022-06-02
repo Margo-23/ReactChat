@@ -4,6 +4,8 @@ import {  QuestionCircleOutlined } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
 import {Button, Block} from '../../../components';
+import { isValid } from 'date-fns';
+import  validateField from "../../../utils/helpers/validateField.js";
 
 
 
@@ -45,14 +47,8 @@ function RegisterForm(props) {
       <Form.Item
         label="E-mail"
         name="email"        
-        validateStatus={ !touched.email? '' : errors.email && touched.email ? "error": 'success'}
+        validateStatus={validateField("email", touched, errors)}
         hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Введите корректный емейл',
-          },
-        ]}
        >
         <Input   
         onChange={handleChange}
@@ -63,12 +59,6 @@ function RegisterForm(props) {
 
       <Form.Item
         label="Username"        
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
        >
         <Input  
          type="text"
@@ -83,15 +73,9 @@ function RegisterForm(props) {
       <Form.Item
         label="Password"
         name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Только латиница!',
-          },
-        ]}
-        validateStatus={ !touched.password? '' : errors.password && touched.password ? "error": 'success'}
+        validateStatus={validateField("password", touched, errors)}
         hasFeedback
-        help='Только латиница!'
+        help={ !touched.password ? '' : errors.password && touched.password ? 'Заглавные+цифры+строчные': ''}
       >
         <Input.Password
                 onChange={handleChange}
@@ -104,14 +88,16 @@ function RegisterForm(props) {
       <Form.Item
         label="Password repeat"
         name="password-repeat"
-        rules={[
-          {
-            required: true,
-            message: 'Please repeat your password!',
-          },
-        ]}
+        validateStatus={validateField("password_2", touched, errors)}
+        hasFeedback
       >
-        <Input.Password />
+        <Input.Password
+        onChange={handleChange}
+        onBlur={handleBlur}     
+        id="password_2"
+        value={values.password}
+        
+        />
       </Form.Item>
   
       <Form.Item
@@ -120,6 +106,7 @@ function RegisterForm(props) {
           span: 16,
         }}
       >
+        {/* {isSubmiting && !isValid && <span>error</span>} */}
         <Button onClick={handleSubmit} type="primary" size='large'>Зарегистрироваться</Button>
       </Form.Item>
       <Link className='auth__register-link' to='/'>Войти в аккаунт</Link>

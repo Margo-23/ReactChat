@@ -3,24 +3,30 @@ import React from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import ruLocale from 'date-fns/locale/ru';
 import classNames from 'classnames';
+import { Time, IconReaded } from '../';
 
-import readedSvg from '../../assets/img/readed.svg';
-import noreadedSvg from '../../assets/img/noreaded.svg';
 import './Message.scss';
 
-function Message({avatar, text, date, user, isme, isReaded, attachments}) {
+function Message({avatar, text, date, user, isme, isReaded, attachments, isTyping}) {
   return (
-    <div className={classNames('message', {'message--isme': isme})}>
+    <div className={classNames('message', {'message--isme': isme, 'message--is-typing': isTyping, 'message--image': attachments && attachments.length==1})}>
       <div className='message__avatar'>
         <img className='avatar' alt={`User ${user.fullname}`} src={avatar}/>
       </div>
       <div className='message__content'>
-        {isme && (isReaded ? <img className='message__icon-readed' src={readedSvg} alt='readed icon'></img> : <img className='message__icon-readed message__icon-readed--no' src={noreadedSvg} alt='noreaded icon'></img>)}
+        {<IconReaded isMe={isme} isReaded={isReaded}></IconReaded>}
         <div className='message__info'>
-        <div className='message__bubble'>
-          <p className='message__text'>{text}</p>
-          <span className='message__date'>{formatDistanceToNow(new Date(date), {includeSeconds: true,addSuffix: true, locale: ruLocale})}</span>
-        </div>
+        {(text || isTyping) && <div className='message__bubble'>
+          {text && <p className='message__text'>{text}</p>}
+          {isTyping && (
+                <div className="message__typing">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              )}
+          {date && <span className='message__date'>{<Time date></Time>}</span>}
+        </div>}
         <div className='message__attachments'>
             {attachments && attachments.map((item) =>(
               <div className='message__attachments-item'><img src={item.url} alt={item.fileName}></img></div>
@@ -43,6 +49,7 @@ Message.propsType = {
   user: PropTypes.object,
   date: PropTypes.string,
   attachments: PropTypes.array,
+  idTyping: PropTypes.bool,
 };
 
 export default Message

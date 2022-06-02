@@ -3,53 +3,67 @@ import { Form, Input } from 'antd';
 import {Link} from 'react-router-dom';
 
 import {Button, Block} from '../../../components';
+import  validateField from "../../../utils/helpers/validateField.js";
 
-function LoginForm() {
+function LoginForm(props) {
+  // console.log(props);
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props;
   return (
     <div>
-         <div className="auth__top">
+    <div className="auth__top">
     <h2>Войти в аккаунт</h2>
     <p>Пожалуйста войдите в свой аккаунт</p>
     </div>
  <Block>
     <Form
-    name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
-    initialValues={{
-      remember: true,
-    }}
-    autoComplete="off"
+      className='login-form'
+      onSubmit={handleSubmit}
+      name="basic"
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+      autoComplete="off"
   >
     <Form.Item
       label="Username"
       name="username"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your username!',
-        },
-      ]}
+      validateStatus={validateField("email", touched, errors)}
+      hasFeedback
      >
-      <Input   />
+      <Input       
+        onChange={handleChange}
+        onBlur={handleBlur}     
+        id="email"
+        value={values.email}  />
     </Form.Item>
 
     <Form.Item
-      label="Password"
-      name="password"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your password!',
-        },
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
+        label="Password"
+        name="password"
+        validateStatus={validateField("password", touched, errors)}
+        help={!touched.password ? "" : errors.password}
+        hasFeedback
+      >
+        <Input.Password
+        onChange={handleChange}
+        onBlur={handleBlur}     
+        id="password"
+        value={values.password}
+        />
+      </Form.Item>
 
     <Form.Item
       wrapperCol={{
@@ -57,7 +71,8 @@ function LoginForm() {
         span: 16,
       }}
     >
-      <Button type="primary" size='large'>Войти</Button>
+    {/* {isSubmiting && !isValid && <span>error</span>} */}
+    <Button onClick={handleSubmit} type="primary" size='large'>Войти в аккаунт</Button>
     </Form.Item>
     <Link className='auth__register-link' to='/register'>Зарегистрироваться</Link>
   </Form>
