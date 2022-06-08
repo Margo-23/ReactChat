@@ -8,25 +8,24 @@ import {Avatar} from '../../components'
 
 
 const getMessageTime = createdAt => {
-    if (isToday(createdAt)) {
-      return format(createdAt, 'HH:mm');
+  let date = new Date(createdAt)
+    if (isToday(date)) {
+      return format(date, 'HH:mm');
     } else {
-      return format(createdAt, 'dd.MM.yyyy');
+      return format(date, 'dd.MM.yyyy');
     }
   };
 
 
-function getAvatar(avatar){
-    if(avatar){
-        return <img src={avatar} alt={"Avatar"} />  ;
-    }else{
-        //Make avatar
-    }
-}
-
-function DialogItem({user, message, unReaded, isMe}) {
+function DialogItem({_id, user, message, unReaded, isMe, onSelect, currentDialog}) {
   return (
-    <div className={classNames('dialogs__item', {'dialogs__item--online': user.isOnline})}>
+    <div className={classNames('dialogs__item', {
+      'dialogs__item--online': user.isOnline,
+      'dialogs__item--selected': currentDialog === _id
+    })}
+    onClick = {onSelect.bind(this, _id)}
+    
+    >
         <div className='dialogs__item-avatar'>
         <Avatar user={user}></Avatar>           
         </div>

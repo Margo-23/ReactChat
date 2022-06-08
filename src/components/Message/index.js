@@ -10,7 +10,7 @@ import waveSvg from '../../assets/img/wave.svg';
 import playSvg from '../../assets/img/play.svg';
 import pauseSvg from '../../assets/img/pause.svg';
 import convertCurrentTime from '../../utils/helpers/convertCurrentTime'
-import { Avatar } from '../';
+import {Avatar} from '../../components'
 
 
 
@@ -83,8 +83,7 @@ return (
     'message--is-audio': audio,
     })}>
       <div className='message__avatar'>
-        <img className='avatar' alt={`User ${user.fullname}`} src={avatar}/>
-        {/* <Avatar user={user}></Avatar> */}
+        <Avatar user={user}></Avatar> 
       </div>
       <div className='message__content'>
         {<IconReaded isMe={isme} isReaded={isReaded}></IconReaded>}

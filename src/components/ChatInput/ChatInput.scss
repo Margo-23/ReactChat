@@ -114,3 +114,12 @@
       transform: scale(1);
     }
   }
+  .emoji{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: none;
+  }
+  .emoji--visible{
+    display: block;
+  }
